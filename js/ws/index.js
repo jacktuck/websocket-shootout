@@ -3,13 +3,18 @@
 var cluster = require('cluster');
 var ws      = require('ws');
 
+console.log('wss', wss)
 var wss = new ws.Server({
   perMessageDeflate: false,
   port: 3334
 });
+// console.log('wss', wss)
 
 if (cluster.isWorker) {
+  console.log(1)
   process.on('message', broadcastMessage);
+} else {
+  console.log(2)
 }
 
 function each(ws) {

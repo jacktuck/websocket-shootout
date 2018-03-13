@@ -8,6 +8,7 @@ if (!impl) {
 }
 
 switch (impl) {
+  case 'turbo':
   case 'ws':
   case 'uws':
   case 'faye':
@@ -49,7 +50,7 @@ if (cluster.isMaster) {
 
   cluster.on('exit', (worker, code, signal) => {
     console.log(`worker ${worker.process.pid} died`);
-    setTimeout(() => cluster.fork(), 1000);
+    setTimeout(() => cluster.fork(), 10000);
   });
 } else {
   require(`./${impl}/`);
